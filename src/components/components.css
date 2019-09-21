@@ -1,0 +1,16 @@
+.componentButtons{
+  display:flex;
+  align-items:center;
+  flex-wrap: wrap;
+  flex-direction:column;
+}
+.margins{
+  width:200px;
+  
+  margin:10px;
+}
+.center{
+
+
+  margin:20%;
+}
