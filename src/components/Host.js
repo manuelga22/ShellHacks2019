@@ -1,28 +1,40 @@
 import React,{Component} from 'react';
-import {  Link } from "react-router-dom";
+import axios from 'axios';
 
 class Host extends Component{
   state={
-    partyName:"",
+    code:"",
     player1:"",
   }
   handleChangePartyName= (e)=>{
    this.setState({
-    partyName:e.target.value
+    code:e.target.value
    })
-   console.log(this.state.partyName)
+ 
   }
   handleUsernameChange=(e)=>{
     this.setState({
        player1: e.target.value
     })
-    console.log(this.state.username)
+    
   }
 
   submitForm(e){
     e.preventDefault();
-    this.history.push(`/room/${this.state.partyName}/${this.state.player1}`); 
+    this.history.push(`/game/${this.state.code}/${this.state.player2}`);  
   }
+
+  createGame=()=>{
+    axios.post('http://localhost:3000/api/create/game',{
+      code: this.props.match.params.code,
+      player1: this.state.player1
+    })
+    .then((response)=>{
+      console.log(response);
+    })
+    .catch((err)=>console.log(err))
+  }
+
 
 render(){
   return(
@@ -38,7 +50,7 @@ render(){
         <label className="label">Enter your name</label>
         <input onChange= {this.handleUsernameChange} />
      </div>
-     <button className="btn red">JOIN GAME</button>
+     <button className="btn red" onClick={this.createGame}>HOST GAME</button>
      </form>
      </div>
    </div>

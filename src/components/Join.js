@@ -1,27 +1,38 @@
 import React,{Component, Fragment} from 'react';
-import {  Link } from "react-router-dom";
+import axios from 'axios';
 
 class Join extends Component{
   state={
-    partyCode:"",
-    payer2:""
+    code:"",
+    player2:""
   }
 
-  handleChangePartyName(e){
+   handleChangePartyName=(e)=>{
     this.setState({
       partyCode:e.target.value
     })
    }
 
-   handleUsernameChange(e){
+   handleUsernameChange=(e)=>{
      this.setState({
-      payer2: e.target.value
+      player2: e.target.value
      })
    }
-   submitForm(e){
+   submitForm=(e)=>{
     e.preventDefault();
-    this.history.push(`/joinMatch/${this.state.partyCode}/${this.state.player1}`); 
-  }
+    this.history.push(`/game/${this.state.code}/${this.state.player2}`); 
+   }
+   
+   joinGame=()=>{
+     axios.post('http://localhost:3000/api/join/game',{
+       code: this.state.code,
+       player2: this.state.player2
+     })
+     .then((response)=>{
+       console.log(response);
+     }).catch(err=>{console.log(err)})
+   }
+
 render(){
   return(
    <Fragment>
@@ -36,7 +47,7 @@ render(){
         <label className="label">Enter your name</label>
         <input onChange= {e=>this.handleUsernameChange(e)}/>
      </div>
-     <button className="btn red">HOST</button>
+     <button className="btn red" onClick={this.joinGame}>JOIN GAME</button>
      </form>
      </div>
    </Fragment>
