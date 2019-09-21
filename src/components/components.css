@@ -4,13 +4,23 @@
   flex-wrap: wrap;
   flex-direction:column;
 }
+
 .margins{
   width:200px;
-  
   margin:10px;
 }
+
 .center{
+  margin:15%;
+}
+.forms{
+  border: solid black 5px;
+  width: 60%;
+  height:50%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.centeredBlock{
+  margin-top: 100px;
 
-
-  margin:20%;
 }
